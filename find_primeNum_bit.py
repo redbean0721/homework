@@ -39,8 +39,8 @@ def sieve_of_eratosthenes_bit_array(start, end):
 
     primes = [2] if start <= 2 and end >= 2 else []
     primes += [start + 2 * i for i in range(sieve_size) if sieve[i] == 0]
-    sum = sum(primes)
-    return primes, sum
+    primes_sum = sum(primes)
+    return primes, primes_sum
 
 while True:
     try:
@@ -62,11 +62,14 @@ while True:
     except KeyboardInterrupt:
         exit()
 
+# start_time = time.time()
 # primes, sum = aa(a, b)
 primes, sum = sieve_of_eratosthenes_bit_array(a, b)
+# end_time = time.time()
 print(f"質數有: {primes}",
       f"\n質數的總和為: {sum}")
 if is_prime(sum):
     print("總和 \033[1m是\033[0m 質數")
 else:
     print("總和 \033[1m不是\033[0m 質數")
+# print(f"執行時間: {end_time - start_time}")
