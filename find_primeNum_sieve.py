@@ -23,7 +23,7 @@ def is_prime(n):
 #             sum += num
 #     return primes, sum
 
-def sieve_of_eratosthenes_bit_array(start, end):
+def sieve_of_eratosthenes(start, end):
     # 從 2 開始
     if start < 2: 
         start = 2
@@ -65,7 +65,7 @@ while True:
 
 # start_time = time.time()
 # primes, sum = aa(a, b)
-primes, sum = sieve_of_eratosthenes_bit_array(a, b)
+primes, sum = sieve_of_eratosthenes(a, b)
 # end_time = time.time()
 print(f"質數有: {primes}",
       f"\n質數的總和為: {sum}")
