@@ -7,7 +7,8 @@ a = None
 b = None
 
 def is_prime(n):
-    if n == 1: return False
+    if n == 1: 
+        return False
     for i in range(2, int(math.sqrt(n)) + 1):
         if n % i == 0:
             return False
@@ -23,22 +24,22 @@ def is_prime(n):
 #     return primes, sum
 
 def sieve_of_eratosthenes_bit_array(start, end):
+    # 從 2 開始
     if start < 2: 
         start = 2
-    # 只處理奇數
-    sieve_size = (end - start) // 2 + 1
-    sieve = bytearray(sieve_size)
 
-    # 將起點取到奇數
-    start = max(3, start | 1)
-    for p in range(3, int(math.sqrt(end)) + 1, 2):
-        if p >= start and (p - start) % 2 == 0 and sieve[(p - start) // 2]:
-            continue
-        for multiple in range(max(p * p, (start + p - 1) // p * p), end + 1, 2 * p):
-            sieve[(multiple - start) // 2] = 1
+    sieve_size = end - start + 1
+    sieve = [True] * sieve_size  # 假設所有數都是質數
 
-    primes = [2] if start <= 2 and end >= 2 else []
-    primes += [start + 2 * i for i in range(sieve_size) if sieve[i] == 0]
+    for p in range(2, int(math.sqrt(end)) + 1):
+        # 計算 p 在範圍內的第一個倍數
+        start_index = max(p * p, start + (p - start % p) % p)  # 計算第一個有效的倍數
+        if start_index == p:  # 如果第一個倍數是 p 本身，則從 p 的平方開始篩選
+            start_index = p * p
+        for multiple in range(start_index, end + 1, p):
+            sieve[multiple - start] = False  # 標記非質數
+
+    primes = [num for num, is_prime in enumerate(sieve, start=start) if is_prime]
     primes_sum = sum(primes)
     return primes, primes_sum
 
