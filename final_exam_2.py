@@ -15,16 +15,18 @@ while True:
             continue
         choose.append(num)
         counter += 1
-        if counter == 6:
+        if counter == 7:
             break
     except ValueError:
         print("請輸入有效的整數")
     except AssertionError as e:
         print(e)
 
+print(f"你投注的號碼為 {sorted(choose)}")
+
 lotto = random.sample(range(1, 50), 7)
 # print(sorted(lotto))
 
 if sorted(choose) == sorted(lotto):
     print("恭喜中頭獎")
-else: print("未中獎")
+else: print("未中頭獎")
